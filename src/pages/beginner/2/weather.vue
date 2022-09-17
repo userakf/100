@@ -4,7 +4,7 @@
       placeholder="Search for a city">
     <button border py-1 px-2 rounded @click="handleClick">SUBMIT</button>
   </div>
-  <div rounded bg-white text-black p-5 text-left>
+  <div rounded bg-white text-black p-5 text-left w-60 mx-auto my-10>
     <h2 text-xl>
       <span>{{ weather.name }}</span>
       <sup></sup>
@@ -16,18 +16,14 @@
 <script setup lang="ts">
 import { useWeather } from './hooks/useWeather'
 import type { Weather } from './hooks/useWeather'
+const { getWeather } = useWeather()
 const inputVal = $ref('')
 let weather = $ref<Weather>({})
 async function handleClick() {
-  clean()
-  const { getWeather } = useWeather(inputVal)
-  const { data } = await getWeather()
+  const { data } = await getWeather(inputVal)
   weather = data
 }
 const temp = computed(() => Math.round(weather?.main?.temp!))
-function clean() {
-  
-}
 </script>
 
 <style scoped>

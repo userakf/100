@@ -10,7 +10,7 @@ export interface Weather {
   dt?: number
   id?: number
   main?: {
-    temp:number
+    temp: number
   }
   name?: string
   sys?: any
@@ -23,11 +23,11 @@ interface ErrorWeather {
   cod?: string,
   message?: string
 }
-export function useWeather(inputVal: string) {
+export function useWeather() {
   let error = $ref<ErrorWeather>({})
   let data = $ref<Weather>({})
-  const url = `${api.URL}?q=${inputVal}&appid=${api.KEY}&units=metric`
-  async function getWeather() {
+  async function getWeather(inputVal: string) {
+    const url = `${api.URL}?q=${inputVal}&appid=${api.KEY}&units=metric`
     try {
       const ret: Weather = await fetch(url).then(res => res.json())
       data = ret
